@@ -4,7 +4,7 @@
 - Setup SCSS proccessor
 - Setup _Montserrat_ local fonts.
 - Declare all base design tokens: colors, spacing, break-points, .etc...
-- Implement common components: Button
+- Implement common components: Joke card & Button
 - Implement page #1
 - Setup React-router
 - Implement page #2
