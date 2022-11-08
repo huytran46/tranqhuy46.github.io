@@ -1,0 +1,22 @@
+@import 'colors';
+
+$radius: 2px;
+$gutter: 4px;
+
+@mixin border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: $surface-white-three;
+  border-radius: $radius;
+}
+
+@mixin shadow {
+  box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.15);
+}
+
+@function spacingPx($factor) {
+  @if comparable($factor, $gutter) {
+    @return ($gutter * abs($factor));
+  }
+  @return $gutter;
+}

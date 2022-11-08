@@ -1,0 +1,31 @@
+$font-family: Montserrat;
+$font-sm: 12px;
+$font-md: 14px;
+$font-lg: 16px;
+
+@mixin body-text-md {
+  font-family: $font-family;
+  font-size: $font-md;
+  color: $surface-text;
+
+  line-height: 1.57;
+
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+}
+
+@mixin heading-text-md {
+  font-family: $font-family;
+  font-size: $font-lg;
+  color: $surface-text;
+
+  line-height: 1.25;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+}
