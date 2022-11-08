@@ -1,37 +1,5 @@
-@import 'styles/colors';
-@import 'styles/typography';
 @import 'styles/shape';
 
 .App {
   padding: spacingPx(4);
-
-  .cj-joke-card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: spacingPx(2);
-    background-color: $surface-white-two;
-    @include border;
-
-    &:hover {
-      cursor: pointer;
-      @include shadow;
-    }
-
-    &__header {
-      width: 100%;
-      padding: spacingPx(6);
-      padding-bottom: spacingPx(0);
-      @include heading-text-md;
-    }
-
-    &__body {
-      padding: spacingPx(6);
-      padding-top: spacingPx(0);
-    }
-
-    &__copy {
-      @include body-text-md;
-    }
-  }
 }

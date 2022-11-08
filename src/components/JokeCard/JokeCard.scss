@@ -1,0 +1,90 @@
+@import '../../styles/colors';
+@import '../../styles/typography';
+@import '../../styles/shape';
+
+.cj-joke-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: spacingPx(6);
+  padding: spacingPx(6);
+  background-color: $surface-white-two;
+  @include border;
+
+  &:hover {
+    cursor: pointer;
+    @include shadow;
+  }
+
+  &__header {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: spacingPx(2);
+  }
+
+  &__title {
+    @include heading-text-md;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    .cj-default-prefix-icon {
+      height: spacingPx(4);
+      width: spacingPx(4);
+    }
+  }
+
+  &__body {
+    width: 100%;
+  }
+
+  &__copy {
+    @include body-text-md;
+  }
+
+  &__footer {
+    width: 100%;
+  }
+
+  &__actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    &__button {
+      display: flex;
+      align-items: center;
+      gap: spacingPx(2);
+      background-color: $surface-white-two;
+      border: none;
+      cursor: pointer;
+
+      &__body {
+        height: 100%;
+        display: inline-flex;
+        text-transform: uppercase;
+        background-color: transparent;
+        font-weight: bold;
+        font-size: $font-lg;
+        color: $theme-primary;
+      }
+
+      &__append {
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+
+        .cj-see-stats-icon {
+          height: 100%;
+          width: spacingPx(6);
+        }
+      }
+    }
+  }
+}
