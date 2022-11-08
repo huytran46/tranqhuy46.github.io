@@ -1,4 +1,6 @@
 .cj-image-with-fallback {
+  display: inline-block;
+
   &__source,
   &__img {
     max-height: 100%;
