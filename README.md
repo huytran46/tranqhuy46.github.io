@@ -1,2 +1,1 @@
-# chuck-jokes
- Chuck Norris jokes
+# The joke bible
