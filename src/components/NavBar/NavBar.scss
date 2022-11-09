@@ -1,0 +1,53 @@
+@import '../../styles/shape';
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.cj-navbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  color: $surface-white;
+  background-color: $theme-secondary;
+  padding-inline-end: 5vw;
+
+  &__ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .cj-nav-item-icon {
+      height: spacingPx(4);
+      width: spacingPx(4);
+    }
+
+    &__li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: spacingPx(2);
+      height: spacingPx(15);
+      padding-inline: spacingPx(4);
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &--active {
+        background-color: $theme-primary;
+      }
+
+      &__content {
+        @include body-text-md;
+        font-size: 15px;
+        font-weight: 600;
+        color: $surface-white-two;
+      }
+
+      &__icon,
+      &__append {
+        display: grid;
+        place-content: center;
+      }
+    }
+  }
+}
