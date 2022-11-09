@@ -1,7 +1,6 @@
 import './App.scss';
 
-import React from 'react';
-
+import CategoryList from './components/CategoryList';
 import Navbar from './components/NavBar';
 
 function App() {
@@ -26,15 +25,14 @@ function App() {
         </div>
       </div>
 
-      <main>
-        this is a body
-        <div>
-          this is categories list
-          <span>this is category tag 1</span>
-          <span>this is category tag 2</span>
-          <button>this is view all button</button>
-        </div>
-        <hr /> divider here
+      <main className="cj-app__main">
+        <CategoryList
+          onCategoryClick={(cateId) => {
+            console.log(cateId); // TODO: render a random joke {category} - home level 2
+          }}
+        />
+
+        <hr className="cj-app__hr-divider" />
         <div>
           <div>this is category tag</div>
           <div>
