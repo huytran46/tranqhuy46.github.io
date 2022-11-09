@@ -1,45 +1,40 @@
-import type {JokeModel} from './models/joke';
+import {JokeModel} from './models/joke';
 
-import AxiosService from './lib/axios';
-
-interface AllJokesResponse<T> {
-  total: number;
-  result: T[];
+function serializeMap(map: Map<any, any>): string {
+  return JSON.stringify(Array.from(map.entries()));
 }
 
-/**
- *
- * @param query
- * @returns
- */
-export async function fetchAllJokes(
-  query = 'all',
-): Promise<AllJokesResponse<JokeModel>> {
-  try {
-    const response = await AxiosService.get<AllJokesResponse<JokeModel>>(
-      `/jokes/search?query=${query}`,
-    );
-    return (
-      response?.data ?? {
-        total: 0,
-        result: [],
-      }
-    );
-  } catch (error) {
-    throw error;
-  }
+function deserializeMap<T, P>(stringifiedMap: string): Map<T, P> {
+  return new Map<T, P>(JSON.parse(stringifiedMap));
 }
 
-/**
- *
- * @param
- * @returns {string[]} categories
- */
-export async function fetchJokeCategories(): Promise<string[]> {
-  try {
-    const response = await AxiosService.get<string[]>('/jokes/categories');
-    return response?.data ?? [];
-  } catch (error) {
-    throw error;
+const UNCATEGORIZED_CATEGORY_KEY = 'uncategorized';
+const ALL_JOKES_STORAGE_KEY = 'cj-all-jokes';
+
+export function storeJokes(jokes: JokeModel[]) {
+  const map = new Map<string, JokeModel[]>();
+  for (const joke of jokes) {
+    let cateKey = UNCATEGORIZED_CATEGORY_KEY;
+    if (joke.categories?.length) {
+      cateKey = joke.categories[0];
+    }
+    const cachedJokes = map.get(cateKey);
+    if (cachedJokes != null) {
+      cachedJokes.push(joke);
+      map.set(cateKey, cachedJokes);
+    } else {
+      map.set(cateKey, [joke]);
+    }
   }
+  localStorage.setItem(ALL_JOKES_STORAGE_KEY, serializeMap(map));
+}
+
+export function retrieveJokes(cateKey: string): JokeModel[] {
+  const stringifiedData = localStorage.getItem(ALL_JOKES_STORAGE_KEY);
+  if (stringifiedData == null) {
+    return [];
+  }
+  return (
+    deserializeMap<string, JokeModel[]>(stringifiedData)?.get(cateKey) ?? []
+  );
 }
