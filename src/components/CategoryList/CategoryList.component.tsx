@@ -3,8 +3,8 @@ import './CategoryList.scss';
 import clsx from 'clsx';
 import React from 'react';
 
+import {fetchJokeCategories} from '../../api/joke.api';
 import {useAsync} from '../../hooks/use_async';
-import {fetchJokeCategories} from '../../joke.service';
 
 const INIT_NUMBER_OF_CATEGORIES = 5;
 const AVAILABLE_COLOR_CLASS_NAMES = [
