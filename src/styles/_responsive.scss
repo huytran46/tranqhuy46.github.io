@@ -1,0 +1,33 @@
+// Predefined Break-points
+$breakpoints: (
+  phone: 320px,
+  tablet: 768px,
+  desktop: 1024px,
+) !default;
+
+@function translate-media-condition($c) {
+  $condMap: (
+    'screen': 'only screen',
+    'print': 'only print',
+    'phone':
+      '(min-width: #{map-get($breakpoints, "phone")}) and (max-width: #{map-get($breakpoints, "tablet")})',
+    'tablet': '(min-width: #{map-get($breakpoints, "tablet")})',
+    'desktop': '(min-width: #{map-get($breakpoints, "desktop")})',
+  );
+  @return map-get($condMap, $c);
+}
+
+// The mdia mixin
+@mixin media($args...) {
+  $query: '';
+  @each $arg in $args {
+    $op: '';
+    @if ($query != '') {
+      $op: ' and ';
+    }
+    $query: $query + $op + translate-media-condition($arg);
+  }
+  @media #{$query} {
+    @content;
+  }
+}
