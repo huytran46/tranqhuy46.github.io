@@ -1,5 +1,6 @@
-@import 'styles/shape';
-
-.App {
-  padding: spacingPx(4);
+.cj-app {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
 }
