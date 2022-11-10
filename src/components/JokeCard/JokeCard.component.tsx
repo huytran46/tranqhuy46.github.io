@@ -11,7 +11,7 @@ import ImageWithFallback from '../ImageWithFallback';
 interface JokeCardProps {
   title: string;
   description: string;
-  icon?: JSX.Element;
+  iconUrl?: string;
   onSeeStatsClick?: () => void;
 }
 
@@ -34,17 +34,23 @@ const SeeStatsJokeCardIcon = () => (
 );
 
 const JokeCard: React.FC<JokeCardProps> = (props) => {
-  const {
-    title,
-    description,
-    icon = <DefaultJokeCardIcon />,
-    onSeeStatsClick,
-  } = props;
+  const {title, description, iconUrl, onSeeStatsClick} = props;
 
   return (
     <div className="cj-joke-card">
       <div className="cj-joke-card__header">
-        <span className="cj-joke-card__icon">{icon}</span>
+        <span className="cj-joke-card__icon">
+          {iconUrl == null ? (
+            <DefaultJokeCardIcon />
+          ) : (
+            <ImageWithFallback
+              className="cj-default-prefix-icon"
+              src={iconUrl}
+              fallback={yellowBoltPNG}
+              alt="A joke card prefix icon"
+            />
+          )}
+        </span>
         <span className="cj-joke-card__title">{title}</span>
       </div>
       <div className="cj-joke-card__body">

@@ -1,5 +1,6 @@
 @import 'styles/colors';
 @import 'styles/shape';
+@import 'styles/typography';
 @import 'styles/responsive';
 
 .cj-app {
@@ -31,5 +32,39 @@
     @include media('desktop') {
       max-width: 80vw;
     }
+  }
+}
+
+.cj-joke-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: spacingPx(4);
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: spacingPx(4);
+  }
+
+  &__label {
+    @include body-text-md;
+    padding: spacingPx(1) spacingPx(4);
+    border-radius: $radius-lg;
+    color: $surface-white;
+    background-color: $weird-green;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  @include media('phone') {
+    grid-template-columns: 1fr;
+  }
+
+  @include media('tablet') {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include media('desktop') {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
