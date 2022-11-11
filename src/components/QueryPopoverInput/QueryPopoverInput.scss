@@ -1,0 +1,43 @@
+@import '../../styles/shape';
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.cj-query-popover {
+  &__input-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: $radius;
+
+    &__search-input {
+      padding: spacingPx(3);
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      color: $surface-white;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &__search-input__icon {
+      margin-inline: spacingPx(2);
+      height: spacingPx(4);
+      width: spacingPx(4);
+    }
+  }
+
+  &__arrow {
+    border-bottom-color: $surface-white-two !important;
+  }
+  
+  &__arrow-body {
+    background-color: $surface-white-two;
+    border-radius: $radius;
+    @include shadow;
+    font-size: 12px;
+  }
+  
+}
+
