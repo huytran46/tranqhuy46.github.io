@@ -21,6 +21,23 @@
     display: inline-flex;
     align-items: center;
     gap: spacingPx(2);
+    &__container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: spacingPx(3);
+    }
+  }
+
+  &__category {
+    @include body-text-md;
+    padding: spacingPx(1) spacingPx(4);
+    border-radius: $radius-lg;
+    color: $surface-white;
+    background-color: $weird-green;
+    font-weight: 600;
+    text-transform: uppercase;
+    max-width: fit-content;
   }
 
   &__title {

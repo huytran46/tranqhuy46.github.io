@@ -1,10 +1,10 @@
 import './CategoryList.scss';
 
+import {useQuery} from '@tanstack/react-query';
 import clsx from 'clsx';
 import React from 'react';
 
 import {fetchJokeCategories} from '../../api/joke.api';
-import {useAsync} from '../../hooks/use_async';
 
 const INIT_NUMBER_OF_CATEGORIES = 5;
 const AVAILABLE_COLOR_CLASS_NAMES = [
@@ -23,7 +23,11 @@ interface CategoryListProps {
 
 const CategoryList: React.FC<CategoryListProps> = (props) => {
   const {onCategoryClick} = props;
-  const {loading, value: categories} = useAsync(fetchJokeCategories);
+  const {isLoading: loading, data: categories} = useQuery(
+    ['fetchJokeCategories'],
+    fetchJokeCategories,
+  );
+
   const [isShowAll, setIsShowAll] = React.useState(false);
 
   const firstSixCategories = React.useMemo(
