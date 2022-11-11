@@ -65,6 +65,12 @@
       border: none;
       cursor: pointer;
 
+      &:hover {
+        .cj-joke-card__actions__button__append {
+          margin-left: spacingPx(2);
+        }
+      }
+
       &__body {
         height: 100%;
         display: inline-flex;
@@ -81,7 +87,7 @@
         align-items: center;
 
         .cj-see-stats-icon {
-          height: 100%;
+          height: spacingPx(4);
           width: spacingPx(6);
         }
       }

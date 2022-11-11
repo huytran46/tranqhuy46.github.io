@@ -1,0 +1,79 @@
+@import '../../styles/colors';
+@import '../../styles/shape';
+@import '../../styles/typography';
+@import '../../styles/responsive';
+
+.cj-joke-category-list {
+  display: grid;
+  gap: spacingPx(5);
+  max-width: 100%;
+  overflow-x: hidden;
+
+  &__item {
+    padding-block: spacingPx(4);
+    padding-inline: spacingPx(8);
+    @include body-text-md;
+    font-weight: 600;
+    line-height: 1.43;
+    text-align: center;
+    text-transform: uppercase;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &--danger {
+      border-color: $theme-danger;
+      background-color: $theme-danger;
+      color: $surface-white-two;
+    }
+
+    &--pastel-orange {
+      border-color: $pastel-orange;
+      background-color: $pastel-orange;
+      color: $surface-white-two;
+    }
+
+    &--pale-orange {
+      border-color: $pale-orange;
+      background-color: $pale-orange;
+      color: $surface-white-two;
+    }
+
+    &--light-gold {
+      border-color: $surface-white-text;
+      background-color: $light-gold;
+      color: $surface-white-text;
+    }
+
+    &--kiwi-green {
+      border-color: $kiwi-green;
+      background-color: $kiwi-green;
+      color: $surface-white-two;
+    }
+
+    &--weird-green {
+      border-color: $weird-green;
+      background-color: $weird-green;
+      color: $surface-white-two;
+    }
+
+    &--info {
+      border-color: $theme-info;
+      background-color: $theme-info;
+      color: $surface-white-two;
+    }
+  }
+
+  @include media('phone') {
+    grid-template-columns: 1fr;
+  }
+
+  @include media('tablet') {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @include media('desktop') {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
