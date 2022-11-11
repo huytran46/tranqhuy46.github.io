@@ -8,7 +8,7 @@ function deserializeMap<T, P>(stringifiedMap: string): Map<T, P> {
   return new Map<T, P>(JSON.parse(stringifiedMap));
 }
 
-const UNCATEGORIZED_CATEGORY_KEY = 'uncategorized';
+export const UNCATEGORIZED_CATEGORY_KEY = 'uncategorized';
 const ALL_JOKES_STORAGE_KEY = 'cj-all-jokes';
 
 export function storeJokes(jokes: JokeModel[]) {
