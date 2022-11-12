@@ -10,4 +10,4 @@
 
 
 # Many thanks
-# [Quoc Huy](https://github.io/tranqhuy46)
+# [Quoc Huy](https://github.com/tranqhuy46)
