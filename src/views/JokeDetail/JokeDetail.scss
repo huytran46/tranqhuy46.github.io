@@ -1,0 +1,124 @@
+@import '../../styles/shape';
+@import '../../styles/responsive';
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.cj-joke-view {
+  display: grid;
+  place-content: center;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-block: spacingPx(10);
+    gap: spacingPx(4);
+  }
+
+  &__body {
+    display: flex;
+    gap: spacingPx(4);
+
+    &--left {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: spacingPx(4);
+
+      .cj-joke-card {
+        flex: 1;
+      }
+    }
+
+    &__aside {
+      border: 1px solid $surface-white-three;
+      padding: spacingPx(6);
+      display: flex;
+      flex-direction: column;
+      gap: spacingPx(6);
+      min-width: 240px;
+      border-radius: $radius;
+
+      &__label {
+        @include heading-text-md;
+      }
+
+      &__list {
+        display: flex;
+        flex-direction: column;
+        gap: spacingPx(2);
+      }
+
+      &__item {
+        &__link {
+          @include body-text-md;
+          font-size: 14px;
+          // text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &__back {
+    height: spacingPx(6);
+    width: spacingPx(6);
+    cursor: pointer;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: spacingPx(4);
+
+    &__button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: spacingPx(1);
+
+      &__body {
+        height: spacingPx(10);
+        width: spacingPx(10);
+        border-radius: 50%;
+        border: none;
+        padding: spacingPx(2);
+        cursor: pointer;
+
+        &--like {
+          background-color: $theme-success;
+          ~ .cj-joke-view__actions__button__append {
+            @include body-text-md;
+            color: $theme-success;
+            font-weight: 600;
+          }
+        }
+
+        &--dislike {
+          padding-top: spacingPx(2.5);
+          background-color: $theme-danger;
+          ~ .cj-joke-view__actions__button__append {
+            @include body-text-md;
+            color: $theme-danger;
+            font-weight: 600;
+          }
+        }
+      }
+
+      &__append {
+        font-size: 12px;
+      }
+    }
+  }
+
+  @include media('phone') {
+    max-width: 90vw;
+  }
+  @include media('tablet') {
+    max-width: 80vw;
+  }
+  @include media('desktop') {
+    max-width: 60vw;
+  }
+}

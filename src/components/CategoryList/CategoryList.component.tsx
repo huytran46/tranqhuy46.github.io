@@ -1,10 +1,14 @@
 import './CategoryList.scss';
 
+import {useQuery} from '@tanstack/react-query';
 import clsx from 'clsx';
 import React from 'react';
 
 import {fetchJokeCategories} from '../../api/joke.api';
-import {useAsync} from '../../hooks/use_async';
+import arrowDownPNG from '../../assets/arrow-down.png';
+import arrowDownWEBP from '../../assets/arrow-down.webp';
+import Button from '../Button';
+import ImageWithFallback from '../ImageWithFallback';
 
 const INIT_NUMBER_OF_CATEGORIES = 5;
 const AVAILABLE_COLOR_CLASS_NAMES = [
@@ -23,7 +27,11 @@ interface CategoryListProps {
 
 const CategoryList: React.FC<CategoryListProps> = (props) => {
   const {onCategoryClick} = props;
-  const {loading, value: categories} = useAsync(fetchJokeCategories);
+  const {isLoading: loading, data: categories} = useQuery(
+    ['fetchJokeCategories'],
+    fetchJokeCategories,
+  );
+
   const [isShowAll, setIsShowAll] = React.useState(false);
 
   const firstSixCategories = React.useMemo(
@@ -51,11 +59,18 @@ const CategoryList: React.FC<CategoryListProps> = (props) => {
           {category}
         </span>
       ))}
-      <button
+      <Button
+        variant="outlined"
         onClick={() => setIsShowAll((prev) => !prev)}
-        className={clsx('cj-joke-category-list__item')}>
+        className={clsx(
+          'cj-joke-category-list__item',
+          'cj-joke-category-list__item__btn',
+        )}
+        rightIcon={
+          <ImageWithFallback src={arrowDownWEBP} fallback={arrowDownPNG} />
+        }>
         {isShowAll ? 'Show less' : 'View all'}
-      </button>
+      </Button>
     </div>
   );
 };

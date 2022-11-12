@@ -21,6 +21,23 @@
     display: inline-flex;
     align-items: center;
     gap: spacingPx(2);
+    &__container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: spacingPx(3);
+    }
+  }
+
+  &__category {
+    @include body-text-md;
+    padding: spacingPx(1) spacingPx(4);
+    border-radius: $radius-lg;
+    color: $surface-white;
+    background-color: $weird-green;
+    font-weight: 600;
+    text-transform: uppercase;
+    max-width: fit-content;
   }
 
   &__title {
@@ -41,6 +58,7 @@
 
   &__body {
     width: 100%;
+    flex: 1;
   }
 
   &__copy {
@@ -56,41 +74,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     &__button {
-      display: flex;
-      align-items: center;
-      gap: spacingPx(2);
-      background-color: $surface-white-two;
-      border: none;
-      cursor: pointer;
-
-      &:hover {
-        .cj-joke-card__actions__button__append {
-          margin-left: spacingPx(2);
-        }
-      }
-
-      &__body {
-        height: 100%;
-        display: inline-flex;
-        text-transform: uppercase;
-        background-color: transparent;
-        font-weight: bold;
-        font-size: $font-lg;
-        color: $theme-primary;
-      }
-
-      &__append {
-        height: 100%;
-        display: inline-flex;
-        align-items: center;
-
-        .cj-see-stats-icon {
-          height: spacingPx(4);
-          width: spacingPx(6);
-        }
-      }
+      padding-right: spacingPx(0);
     }
   }
 }
