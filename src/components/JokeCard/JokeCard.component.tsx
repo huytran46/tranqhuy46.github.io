@@ -6,6 +6,7 @@ import arrowRightWEBP from '../../assets/arrow-right.png';
 import arrowRightPNG from '../../assets/arrow-right.webp';
 import yellowBoltPNG from '../../assets/yellow-bolt.png';
 import yellowBoltWEBP from '../../assets/yellow-bolt.webp';
+import Button from '../Button';
 import ImageWithFallback from '../ImageWithFallback';
 
 interface JokeCardProps {
@@ -21,15 +22,6 @@ const DefaultJokeCardIcon = () => (
     className="cj-default-prefix-icon"
     src={yellowBoltWEBP}
     fallback={yellowBoltPNG}
-    alt="A joke card prefix icon"
-  />
-);
-
-const SeeStatsJokeCardIcon = () => (
-  <ImageWithFallback
-    className="cj-see-stats-icon"
-    src={arrowRightWEBP}
-    fallback={arrowRightPNG}
     alt="A joke card prefix icon"
   />
 );
@@ -63,16 +55,19 @@ const JokeCard: React.FC<JokeCardProps> = (props) => {
       {onSeeStatsClick != null && (
         <div className="cj-joke-card__footer">
           <div className="cj-joke-card__actions">
-            <button
+            <Button
+              variant="ghost"
               className="cj-joke-card__actions__button"
+              rightIcon={
+                <ImageWithFallback
+                  src={arrowRightWEBP}
+                  fallback={arrowRightPNG}
+                  alt="A joke card see stat button icon"
+                />
+              }
               onClick={onSeeStatsClick}>
-              <span className="cj-joke-card__actions__button__body">
-                see stats
-              </span>
-              <span className="cj-joke-card__actions__button__append">
-                <SeeStatsJokeCardIcon />
-              </span>
-            </button>
+              see stats
+            </Button>
           </div>
         </div>
       )}

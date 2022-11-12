@@ -100,7 +100,6 @@ const JokeView: React.FC = () => {
           <div className="cj-joke-view__body--left">
             {loadedJoke != null && (
               <JokeCard
-              
                 title={loadedJoke.value.split(/\s/)?.slice(0, 3)?.join(' ')}
                 description={loadedJoke.value}
                 category={loadedJoke.categories[0]}

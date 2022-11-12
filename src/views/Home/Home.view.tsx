@@ -1,15 +1,19 @@
 import './Home.scss';
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
-import { fetchAllJokes } from '../../api/joke.api';
+import {fetchAllJokes} from '../../api/joke.api';
+import arrowDownPNG from '../../assets/arrow-down.png';
+import arrowDownWEBP from '../../assets/arrow-down.webp';
+import Button from '../../components/Button';
 import CategoryList from '../../components/CategoryList';
+import ImageWithFallback from '../../components/ImageWithFallback';
 import JokeCard from '../../components/JokeCard';
-import { retrieveJokes, storeJokes } from '../../joke.service';
+import {retrieveJokes, storeJokes} from '../../joke.service';
 
 const HomeView: React.FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [activeCateId, setActiveCateId] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -46,12 +50,22 @@ const HomeView: React.FC = () => {
               key={joke.id}
               title={joke.value.split(/\s/)?.slice(0, 3)?.join(' ')}
               description={joke.value}
-              onSeeStatsClick={()=>navigate('/joke/' + joke.id)}
+              onSeeStatsClick={() => navigate('/joke/' + joke.id)}
               // iconUrl={joke.icon_url}
             />
           ))}
         </div>
-        <button>this is view more button</button>
+        <Button
+          variant="outlined"
+          rightIcon={
+            <ImageWithFallback
+              src={arrowDownWEBP}
+              fallback={arrowDownPNG}
+              alt="view more button"
+            />
+          }>
+          view more
+        </Button>
       </div>
     </main>
   );

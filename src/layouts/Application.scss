@@ -11,60 +11,166 @@
 
   height: 100%;
   width: 100%;
-}
 
-.cj-app__jumbotron {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: spacingPx(60);
+  & .cj-navbar {
+    @include media('phone') {
+      display: none;
+    }
+    @include media('tablet') {
+      display: flex;
+    }
+  }
 
-  &__cover {
-    position: absolute;
-    inset: 0;
+  &__jumbotron {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
     width: 100%;
-    height: 100%;
+    min-height: spacingPx(60);
 
-    .cj-image-with-fallback__img {
+    &__cover {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+
+      .cj-image-with-fallback__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__imposter {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: spacingPx(4);
+      padding: spacingPx(4);
+    }
+
+    &__form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      max-height: 100%;
+      padding-block: spacingPx(8);
+
+      &__label {
+        @include heading-text-md;
+        text-transform: capitalize;
+        color: $theme-primary;
+        font-size: 48px;
+        font-weight: normal;
+      }
+
+      &__desc {
+        @include heading-text-md;
+        font-size: 22px;
+        text-transform: capitalize;
+        color: $surface-white;
+      }
+
+      @include media('phone') {
+        gap: spacingPx(2);
+      }
+
+      @include media('tablet') {
+      }
+
+      @include media('desktop') {
+      }
+    }
+    @include media('phone') {
+      min-height: spacingPx(80);
     }
   }
 
-  &__imposter {
-    position: absolute;
-    inset: 0;
+  &__main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: spacingPx(4);
-  }
+    max-width: 100%;
 
-  &__form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding-block: spacingPx(8);
-
-    &__label {
-      @include heading-text-md;
-      text-transform: capitalize;
-      color: $theme-primary;
-      font-size: 48px;
-      font-weight: normal;
+    @include media('phone') {
+      padding-inline: spacingPx(4);
     }
 
-    &__desc {
+    @include media('tablet') {
+      padding-inline: spacingPx(8);
+    }
+
+    @include media('desktop') {
+      padding-inline: spacingPx(20);
+    }
+  }
+
+  &__footer {
+    position: relative;
+    height: 133px;
+    min-height: 133px;
+    width: 100%;
+
+    &__cover,
+    &__imposter {
+      height: 100%;
+      max-height: 100%;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &__cover {
+      .cj-image-with-fallback__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__imposter {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: spacingPx(6);
+    }
+
+    &__cta {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      max-height: 100%;
+      max-width: 30vw;
+
+      &__label {
+        padding-left: spacingPx(4);
+      }
+
       @include heading-text-md;
-      font-size: 22px;
-      text-transform: capitalize;
       color: $surface-white;
+      overflow: hidden;
+
+      @include media('phone') {
+        min-width: 50vw;
+      }
+
+      @include media('tablet') {
+        min-width: 50vw;
+      }
+
+      @include media('desktop') {
+        max-width: 30vw;
+      }
     }
   }
 }

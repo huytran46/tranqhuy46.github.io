@@ -38,6 +38,7 @@
       flex-direction: column;
       gap: spacingPx(6);
       min-width: 240px;
+      border-radius: $radius;
 
       &__label {
         @include heading-text-md;

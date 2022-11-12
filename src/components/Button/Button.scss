@@ -1,0 +1,83 @@
+@import '../../styles/colors';
+@import '../../styles/shape';
+@import '../../styles/typography';
+
+.cj-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  gap: spacingPx(2);
+  border: none;
+  border-radius: $radius;
+  background-color: transparent;
+  padding: spacingPx(2) spacingPx(4);
+  cursor: pointer;
+
+  &:hover {
+    &.cj-button--ghost {
+      .cj-button {
+        &__append {
+          transition-property: all;
+          transition-duration: 0.1s;
+          transition-timing-function: linear;
+          transform: translateX(spacingPx(2));
+        }
+      }
+    }
+  }
+
+  &__body {
+    flex: 1;
+    height: 100%;
+    width: fit-content;
+    max-width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    text-transform: uppercase;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: $font-sm;
+    color: $theme-primary;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  &__append {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon,
+    & .cj-image-with-fallback__img {
+      height: spacingPx(4);
+      width: spacingPx(4);
+    }
+  }
+
+  &.cj-button--solid {
+    background-color: $theme-primary;
+    color: $surface-white;
+    .cj-button {
+      &__body {
+        color: $surface-white;
+      }
+    }
+  }
+
+  &.cj-button--outlined {
+    background-color: $surface-white-two;
+    outline: 1px solid $theme-primary;
+    .cj-button {
+      &__body {
+        color: $theme-primary;
+      }
+    }
+  }
+}

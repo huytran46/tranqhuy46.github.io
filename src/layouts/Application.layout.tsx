@@ -5,14 +5,19 @@ import React from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
 
 import {fetchAllJokes} from '../api/joke.api';
+import arrowRightPNG from '../assets/arrow-right.png';
+import arrowRightWEBP from '../assets/arrow-right.webp';
 import cover1PNG from '../assets/cover.png';
 import cover1WEBP from '../assets/cover.webp';
+import cover2PNG from '../assets/cover-2.png';
+import cover2WEBP from '../assets/cover-2.webp';
 import greenBoltPNG from '../assets/green-bolt.png';
 import greenBoltWEBP from '../assets/green-bolt.webp';
 import orangeBoltPNG from '../assets/orange-bolt.png';
 import orangeBoltWEBP from '../assets/orange-bolt.webp';
 import yellowBoltPNG from '../assets/yellow-bolt.png';
 import yellowBoltWEBP from '../assets/yellow-bolt.webp';
+import Button from '../components/Button';
 import ImageWithFallback from '../components/ImageWithFallback';
 import NavBar from '../components/NavBar';
 import QueryPopoverInput from '../components/QueryPopoverInput';
@@ -39,6 +44,7 @@ const AVAILABLE_ICONS: {
 
 const ApplicationLayout: React.FC = () => {
   const navigate = useNavigate();
+
   return (
     <div className="cj-app">
       <NavBar />
@@ -106,16 +112,30 @@ const ApplicationLayout: React.FC = () => {
         </div>
       </div>
 
-      <Outlet />
+      <div className="cj-app__main">
+        <Outlet />
+      </div>
 
-      <footer>
-        this is footer with background img
-        <div>
-          this is imposter
-          <div>
-            this is call to action container
-            <h5>this is call to action label</h5>
-            <button>this is submit button</button>
+      <footer className="cj-app__footer">
+        <ImageWithFallback
+          className="cj-app__footer__cover"
+          src={cover2WEBP}
+          fallback={cover2PNG}
+        />
+        <div className="cj-app__footer__imposter">
+          <div className="cj-app__footer__cta">
+            <h5 className="cj-app__footer__cta__label">get jokes, get paid for submitting </h5>
+            <Button
+              variant="ghost"
+              rightIcon={
+                <ImageWithFallback
+                  src={arrowRightWEBP}
+                  fallback={arrowRightPNG}
+                  alt="A joke card prefix icon"
+                />
+              }>
+              submit jokes
+            </Button>
           </div>
         </div>
       </footer>

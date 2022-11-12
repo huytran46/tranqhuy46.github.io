@@ -8,6 +8,7 @@
   gap: spacingPx(5);
   max-width: 100%;
   overflow-x: hidden;
+  padding: spacingPx(1);
 
   &__item {
     padding-block: spacingPx(4);
@@ -21,6 +22,15 @@
     border-style: solid;
     border-radius: $radius;
     cursor: pointer;
+
+    &__btn {
+      padding: spacingPx(4) spacingPx(2);
+      width: 100%;
+      border: none;
+      .cj-button__body {
+        max-width: fit-content;
+      }
+    }
 
     &--danger {
       border-color: $theme-danger;
