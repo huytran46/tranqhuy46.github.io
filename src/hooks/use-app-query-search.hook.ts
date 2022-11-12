@@ -11,18 +11,21 @@ export function useAppQuerySearch() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const queryParam = React.useMemo(
-    () => Array.from(searchParams.values())?.[0],
+    () => Array.from(searchParams.values())?.[0] || '',
     [searchParams],
   );
-  console.log('🚀 ~ file: use-app-query-search.hook.ts ~ line 17 ~ useAppQuerySearch ~ queryParam', queryParam)
 
   return {
     queryParam,
     syncQuery: (_query: string) =>
       navigate({
-        search: `?${createSearchParams({
-          query: _query,
-        })}`,
+        search: `?${createSearchParams(
+          _query !== ''
+            ? {
+                query: _query,
+              }
+            : {},
+        )}`,
       }),
     toLevel1Page: () =>
       navigate({
@@ -37,7 +40,6 @@ export function useAppQuerySearch() {
         search: `?${createSearchParams({
           query: queryParam,
         })}`,
-        
       }),
   };
 }
