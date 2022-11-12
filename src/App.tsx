@@ -1,21 +1,26 @@
-import './App.scss';
-
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React from 'react';
+import {Route, Routes} from 'react-router-dom';
 
-import JokeCard from './components/JokeCard';
+import ApplicationLayout from './layouts/Application.layout';
+import HomeView from './views/Home';
+import JokeDetail from './views/JokeDetail';
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <JokeCard
-        title="Lawyer joke"
-        description='A Lawyer dies and goes to Heaven. "There must be some mistakes", the
-          lawyer argues. A Lawyer dies and goes to Heaven. "There must be some
-          mistakes", the lawyer argues. A Lawyer dies and goes to Heaven. "There
-          must be some mistakes", the lawyer argues. A Lawyer dies and goes to
-          Heaven. "There must be some mistakes", the lawyer argues.'
-      />
-    </div>
+    // Provide the client to your App
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route path="/" element={<ApplicationLayout />}>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/joke/:jokeId" element={<JokeDetail />} />
+        </Route>
+        <Route path="*" element={<>Not found</>} />
+      </Routes>
+    </QueryClientProvider>
   );
 }
 

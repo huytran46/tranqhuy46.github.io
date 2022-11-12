@@ -19,8 +19,27 @@
   &__header {
     width: 100%;
     display: inline-flex;
-    align-items: center;
     gap: spacingPx(2);
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: spacingPx(10);
+      max-height: 20%;
+      gap: spacingPx(3);
+    }
+  }
+
+  &__category {
+    @include body-text-md;
+    padding: spacingPx(1) spacingPx(4);
+    border-radius: $radius-lg;
+    color: $surface-white;
+    background-color: $weird-green;
+    font-weight: 600;
+    text-transform: uppercase;
+    max-width: fit-content;
   }
 
   &__title {
@@ -29,7 +48,6 @@
 
   &__icon {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
     box-sizing: border-box;
 
@@ -41,10 +59,13 @@
 
   &__body {
     width: 100%;
+    flex: 1;
   }
 
   &__copy {
     @include body-text-md;
+    max-height: 20vh;
+    overflow: auto;
   }
 
   &__footer {
@@ -56,34 +77,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     &__button {
-      display: flex;
-      align-items: center;
-      gap: spacingPx(2);
-      background-color: $surface-white-two;
-      border: none;
-      cursor: pointer;
+      padding-right: spacingPx(0);
+    }
+  }
 
-      &__body {
-        height: 100%;
-        display: inline-flex;
-        text-transform: uppercase;
-        background-color: transparent;
-        font-weight: bold;
-        font-size: $font-lg;
-        color: $theme-primary;
-      }
-
-      &__append {
-        height: 100%;
-        display: inline-flex;
-        align-items: center;
-
-        .cj-see-stats-icon {
-          height: 100%;
-          width: spacingPx(6);
-        }
+  &--preview {
+    .cj-joke-card {
+      &__copy {
+        @include lines(5);
       }
     }
   }
