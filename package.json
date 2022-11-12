@@ -37,7 +37,7 @@
   "scripts": {
     "start:native": "export PORT=3333 && react-scripts start",
     "start": "concurrently \"npm run start:native\" \"npm run db:start\"",
-    "db:start": "json-server --watch db.json",
+    "db:start": "json-server -p 4000 --watch db.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
