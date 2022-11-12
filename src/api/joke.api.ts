@@ -2,6 +2,10 @@ import type {JokeModel} from '../models/joke';
 
 import AxiosService from '../lib/axios';
 
+const API_LOCAL_HOST =
+  process.env.REACT_APP_API_LOCAL_HOST ||
+  'http://localhost:3000';
+
 interface AllJokesResponse<T> {
   total: number;
   result: T[];
@@ -68,7 +72,7 @@ export async function fetchJokeInfo(
     const response = await AxiosService.get<
       Record<string, {like: number; dislike: number}>
     >(`/jokesInfo`, {
-      baseURL: 'http://localhost:3000',
+      baseURL: API_LOCAL_HOST,
     });
     return response?.data?.[jokeId] ?? null;
   } catch (error) {
@@ -84,7 +88,7 @@ async function fetchJokeInfoMap(): Promise<Record<
     const response = await AxiosService.get<
       Record<string, {like: number; dislike: number}>
     >(`/jokesInfo`, {
-      baseURL: 'http://localhost:3000',
+      baseURL: API_LOCAL_HOST,
     });
     return response?.data ?? null;
   } catch (error) {
@@ -113,7 +117,7 @@ export async function likeJoke(
     const response = await AxiosService.patch<
       Record<string, {like: number; dislike: number}>
     >(`/jokesInfo`, jokeInfo, {
-      baseURL: 'http://localhost:3000',
+      baseURL: API_LOCAL_HOST,
     });
     return response?.data?.[jokeId] ?? null;
   } catch (error) {
@@ -142,7 +146,7 @@ export async function dislikeJoke(
     const response = await AxiosService.patch<
       Record<string, {like: number; dislike: number}>
     >(`/jokesInfo`, jokeInfo, {
-      baseURL: 'http://localhost:3000',
+      baseURL: API_LOCAL_HOST,
     });
     return response?.data?.[jokeId] ?? null;
   } catch (error) {
