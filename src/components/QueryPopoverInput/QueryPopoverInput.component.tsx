@@ -10,6 +10,7 @@ import ImageWithFallback from '../ImageWithFallback';
 
 interface QueryPopoverInputProps<T> {
   maxLength?: number;
+  defaultQuery?: string;
   onSearch: (query: string, setData: (results: T[]) => void) => Promise<void>;
   renderItems: (
     items: T[],
@@ -24,9 +25,15 @@ interface QueryPopoverInputProps<T> {
 const QueryPopoverInput = <T extends object = any>(
   props: QueryPopoverInputProps<T>,
 ) => {
-  const {maxLength = 5, renderItems, onSearch, onItemSelect} = props;
+  const {
+    defaultQuery = '',
+    maxLength = 5,
+    renderItems,
+    onSearch,
+    onItemSelect,
+  } = props;
 
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState(defaultQuery);
   const [items, setItems] = React.useState<T[]>([]);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
@@ -74,6 +81,10 @@ const QueryPopoverInput = <T extends object = any>(
       document.removeEventListener('keydown', onKeydownHandler);
     };
   }, [maxListLength, selectedItem, onItemSelect]);
+
+  React.useEffect(() => {
+    setQuery(defaultQuery);
+  }, [defaultQuery]);
 
   return (
     <Popover

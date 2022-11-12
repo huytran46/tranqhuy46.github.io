@@ -2,7 +2,7 @@ import './Application.scss';
 
 import clsx from 'clsx';
 import React from 'react';
-import {Outlet, useNavigate} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 
 import {fetchAllJokes} from '../api/joke.api';
 import arrowRightPNG from '../assets/arrow-right.png';
@@ -21,6 +21,7 @@ import Button from '../components/Button';
 import ImageWithFallback from '../components/ImageWithFallback';
 import NavBar from '../components/NavBar';
 import QueryPopoverInput from '../components/QueryPopoverInput';
+import {useAppQuerySearch} from '../hooks/use-app-query-search.hook';
 import {UNCATEGORIZED_CATEGORY_KEY} from '../joke.service';
 import {JokeModel} from '../models/joke';
 
@@ -42,8 +43,9 @@ const AVAILABLE_ICONS: {
   },
 ];
 
+// function serializeFormQuery(){}
 const ApplicationLayout: React.FC = () => {
-  const navigate = useNavigate();
+  const querySearch = useAppQuerySearch();
 
   return (
     <div className="cj-app">
@@ -65,11 +67,21 @@ const ApplicationLayout: React.FC = () => {
             </h5>
             <div className="cj-spacer" />
             <QueryPopoverInput<JokeModel>
+              defaultQuery={querySearch.queryParam}
               onSearch={async (query, setData) => {
+                querySearch.syncQuery(query);
                 if (query?.length > 2) {
                   // NOTE: because of ChuckJokes API rule
                   const resp = await fetchAllJokes(query);
                   const {result} = resp;
+
+                  // NOTE: base on business requirement
+                  if (result.length === 1) {
+                    setData([]);
+                    querySearch.syncQuery('');
+                    querySearch.toLevel2Page(result[0].id);
+                    return;
+                  }
                   setData(result);
                 } else {
                   setData([]);
@@ -77,7 +89,7 @@ const ApplicationLayout: React.FC = () => {
               }}
               onItemSelect={(joke) => {
                 if (joke?.id != null) {
-                  navigate(`/joke/${joke.id}`);
+                  querySearch.toLevel2Page(joke.id);
                 }
               }}
               renderItems={(
@@ -124,7 +136,9 @@ const ApplicationLayout: React.FC = () => {
         />
         <div className="cj-app__footer__imposter">
           <div className="cj-app__footer__cta">
-            <h5 className="cj-app__footer__cta__label">get jokes, get paid for submitting </h5>
+            <h5 className="cj-app__footer__cta__label">
+              get jokes, get paid for submitting{' '}
+            </h5>
             <Button
               variant="ghost"
               rightIcon={

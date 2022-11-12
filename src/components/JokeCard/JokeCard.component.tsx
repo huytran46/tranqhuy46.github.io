@@ -1,5 +1,6 @@
 import './JokeCard.scss';
 
+import clsx from 'clsx';
 import React from 'react';
 
 import arrowRightWEBP from '../../assets/arrow-right.png';
@@ -15,6 +16,7 @@ interface JokeCardProps {
   category?: string;
   iconUrl?: string;
   onSeeStatsClick?: () => void;
+  mode?: 'preview' | 'normal';
 }
 
 const DefaultJokeCardIcon = () => (
@@ -27,10 +29,20 @@ const DefaultJokeCardIcon = () => (
 );
 
 const JokeCard: React.FC<JokeCardProps> = (props) => {
-  const {title, description, category, iconUrl, onSeeStatsClick} = props;
+  const {
+    mode = 'normal',
+    title,
+    description,
+    category,
+    iconUrl,
+    onSeeStatsClick,
+  } = props;
 
   return (
-    <div className="cj-joke-card">
+    <div
+      className={clsx('cj-joke-card', {
+        'cj-joke-card--preview': mode === 'preview',
+      })}>
       <div className="cj-joke-card__header__container">
         {category && <span className="cj-joke-card__category">{category}</span>}
         <div className="cj-joke-card__header">

@@ -4,8 +4,6 @@
 @import '../../styles/responsive';
 
 .cj-home {
-
-
   &__hr-divider {
     border-style: solid;
     border-color: $surface-white-three;
@@ -34,6 +32,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: spacingPx(4);
+  &__no-more {
+    display: grid;
+    place-content: center;
+    padding: spacingPx(10);
+    opacity: 0.6;
+    @include heading-text-md;
+  }
 
   &__container {
     display: flex;

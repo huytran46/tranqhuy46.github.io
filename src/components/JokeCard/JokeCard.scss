@@ -19,12 +19,14 @@
   &__header {
     width: 100%;
     display: inline-flex;
-    align-items: center;
     gap: spacingPx(2);
+
     &__container {
       display: flex;
       flex-direction: column;
       width: 100%;
+      height: spacingPx(10);
+      max-height: 20%;
       gap: spacingPx(3);
     }
   }
@@ -46,7 +48,6 @@
 
   &__icon {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
     box-sizing: border-box;
 
@@ -63,6 +64,8 @@
 
   &__copy {
     @include body-text-md;
+    max-height: 20vh;
+    overflow: auto;
   }
 
   &__footer {
@@ -76,6 +79,14 @@
     justify-content: flex-end;
     &__button {
       padding-right: spacingPx(0);
+    }
+  }
+
+  &--preview {
+    .cj-joke-card {
+      &__copy {
+        @include lines(5);
+      }
     }
   }
 }
