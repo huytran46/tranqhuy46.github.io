@@ -29,3 +29,12 @@ $font-lg: 16px;
   font-style: normal;
   letter-spacing: normal;
 }
+
+@mixin lines($number) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: max(abs($number), 1); /* number of lines to show */
+  line-clamp: max(abs($number), 1);
+  -webkit-box-orient: vertical;
+}

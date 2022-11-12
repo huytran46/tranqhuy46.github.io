@@ -40,12 +40,7 @@
     font-size: $font-sm;
     color: $theme-primary;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* number of lines to show */
-    line-clamp: 1;
-    -webkit-box-orient: vertical;
+    @include lines(1);
   }
 
   &__append {

@@ -12,9 +12,12 @@ import ImageWithFallback from '../../components/ImageWithFallback';
 import JokeCard from '../../components/JokeCard';
 import {retrieveJokes, storeJokes} from '../../joke.service';
 
+const DEFAULT_PAGE_SIZE = 6;
+
 const HomeView: React.FC = () => {
   const navigate = useNavigate();
   const [activeCateId, setActiveCateId] = React.useState<string | null>(null);
+  const [pageSize, setPageSize] = React.useState<number>(DEFAULT_PAGE_SIZE);
 
   React.useEffect(() => {
     fetchAllJokes().then((results) => {
@@ -25,9 +28,23 @@ const HomeView: React.FC = () => {
   }, []);
 
   const jokesByCategory = React.useMemo(
-    () => (activeCateId != null ? retrieveJokes(activeCateId).slice(0, 6) : []),
-    [activeCateId],
+    () =>
+      activeCateId != null
+        ? retrieveJokes(activeCateId).slice(0, pageSize)
+        : [],
+    [activeCateId, pageSize],
   );
+
+  const isReachMaxLength = React.useMemo(() => {
+    if (activeCateId == null) {
+      return true;
+    }
+    return retrieveJokes(activeCateId).length <= pageSize;
+  }, [activeCateId, pageSize]);
+
+  React.useEffect(() => {
+    setPageSize(DEFAULT_PAGE_SIZE);
+  }, [activeCateId]);
 
   return (
     <main className="cj-home__main">
@@ -44,9 +61,11 @@ const HomeView: React.FC = () => {
             <span className="cj-joke-list__label">{activeCateId}</span>
           </div>
         )}
+
         <div className="cj-joke-list">
           {jokesByCategory.map((joke) => (
             <JokeCard
+              mode="preview"
               key={joke.id}
               title={joke.value.split(/\s/)?.slice(0, 3)?.join(' ')}
               description={joke.value}
@@ -55,17 +74,24 @@ const HomeView: React.FC = () => {
             />
           ))}
         </div>
-        <Button
-          variant="outlined"
-          rightIcon={
-            <ImageWithFallback
-              src={arrowDownWEBP}
-              fallback={arrowDownPNG}
-              alt="view more button"
-            />
-          }>
-          view more
-        </Button>
+        {isReachMaxLength ? (
+          <div className="cj-joke-list__no-more">No more jokes :(</div>
+        ) : (
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setPageSize((prev) => prev + 6);
+            }}
+            rightIcon={
+              <ImageWithFallback
+                src={arrowDownWEBP}
+                fallback={arrowDownPNG}
+                alt="view more button"
+              />
+            }>
+            view more
+          </Button>
+        )}
       </div>
     </main>
   );

@@ -3,7 +3,7 @@ import './JokeDetail.scss';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {debounce} from 'lodash';
 import React from 'react';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 import {
   dislikeJoke,
@@ -19,28 +19,22 @@ import likeHandPNG from '../../assets/like-hand.png';
 import likeHandWEBP from '../../assets/like-hand.webp';
 import ImageWithFallback from '../../components/ImageWithFallback';
 import JokeCard from '../../components/JokeCard';
+import {useAppQuerySearch} from '../../hooks/use-app-query-search.hook';
 import {retrieveJokes, UNCATEGORIZED_CATEGORY_KEY} from '../../joke.service';
 
 const JokeView: React.FC = () => {
   const {jokeId} = useParams();
-  const navigate = useNavigate();
+  const querySearch = useAppQuerySearch();
 
   const queryClient = useQueryClient();
 
   // Queries
-  const {
-    data: loadedJoke,
-    // loading,
-    // execute: refetchJoke,
-  } = useQuery({
+  const {data: loadedJoke} = useQuery({
     queryKey: ['fetchJokeById', jokeId],
     queryFn: ({queryKey}) => fetchJokeById(queryKey[1]),
   });
 
-  const {
-    data: jokeInfo,
-    // loading,
-  } = useQuery({
+  const {data: jokeInfo} = useQuery({
     queryKey: ['fetchJokeInfo', jokeId],
     queryFn: ({queryKey}) => fetchJokeInfo(queryKey[1]),
   });
@@ -94,7 +88,7 @@ const JokeView: React.FC = () => {
           className="cj-joke-view__back"
           src={chevronLeftWEBP}
           fallback={chevronLeftPNG}
-          onClick={() => navigate('/')}
+          onClick={() => querySearch.toLevel1Page()}
         />
         <div className="cj-joke-view__body">
           <div className="cj-joke-view__body--left">
