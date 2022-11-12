@@ -1,7 +1,8 @@
 {
-  "name": "chuck-jokes",
+  "name": "the-joke-bible",
   "version": "0.1.0",
   "private": true,
+  "author": "tranquochuy4698@gmail.com",
   "dependencies": {
     "@tanstack/react-query": "^4.14.6",
     "@testing-library/jest-dom": "^5.16.5",
